@@ -123,7 +123,7 @@ public class KRW {
             puaf = UInt64(1)
         }
         
-        logger("[#] Status: Gaining KRW")
+        logger("[#] Gaining KRW")
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         
         if let exploit = exploitToUse {

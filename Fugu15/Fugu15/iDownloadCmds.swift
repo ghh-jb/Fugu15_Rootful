@@ -59,7 +59,7 @@ func iDownload_help(_ hndlr: iDownloadHandler, _ cmd: String, _ args: [String]) 
 }
 
 func iDownload_loadSSH(_ hndlr: iDownloadHandler, _ cmd: String, _ args: [String]) throws {
-    KRW.logger("[#] Status: Starting SSH")
+    KRW.logger("[#] Starting SSH")
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     _ = try hndlr.exec("launchctl", args: ["load", "/Library/LaunchDaemons/com.openssh.sshd.plist"])
 }
@@ -166,7 +166,7 @@ func iDownload_doit(_ hndlr: iDownloadHandler, _ cmd: String, _ args: [String]) 
         try iDownload_rootfs(hndlr, "rootfs", ["/dev/disk0s1s8", "/dev/disk0s1s9", "/dev/disk0s1s10", "/dev/disk0s1s11", "/dev/disk0s1s12", "/dev/disk0s1s13"])
     }
     KRW.logger("[+] Dyld patched, rootfs prepared!")
-    KRW.logger("[#] Status: Extracting JB Data")
+    KRW.logger("[#] Extracting JB Data")
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     
     let FuFuGuGu = Bundle.main.bundleURL.appendingPathComponent("libFuFuGuGu.dylib").path
@@ -196,7 +196,7 @@ func iDownload_doit(_ hndlr: iDownloadHandler, _ cmd: String, _ args: [String]) 
         _ = chmod("/usr/bin/inject_criticald", 0o755)
     }
     
-    KRW.logger("[#] Status: Injecting into launchd")
+    KRW.logger("[#] Injecting into launchd")
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     
     KRW.logger("[+] Launching stashd...")
@@ -238,7 +238,7 @@ func iDownload_doit(_ hndlr: iDownloadHandler, _ cmd: String, _ args: [String]) 
 
 
     KRW.logger("[+] Env vars set!")
-    KRW.logger("[#] Status: Running uicache")
+    KRW.logger("[#] Running uicache")
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     _ = try? hndlr.exec("/usr/bin/dash", args: ["-c", "uicache -a"])
     
@@ -437,7 +437,7 @@ func iDownload_autorun(_ hndlr: iDownloadHandler, _ cmd: String, _ args: [String
     KRW.logger("[+] We are in _autorun_!")
     try iDownload_tcload(hndlr, "tcload", [Bundle.main.bundleURL.appendingPathComponent("Fugu15_test.tc").path])
     
-    KRW.logger("[#] Status: Preparing FS")
+    KRW.logger("[#] Preparing FS")
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     _ = try? hndlr.exec("/sbin/mount", args: ["-u", "/private/preboot"])
     

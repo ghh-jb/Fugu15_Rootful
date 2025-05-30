@@ -21,7 +21,7 @@ public extension KRW {
             return
         }
         
-        logger("[#] Status: Bypassing PPL")
+        logger("[#] Bypassing PPL")
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
 
         gKernelPmap = kernelProc!.task!.vmMap!.pmap!.address

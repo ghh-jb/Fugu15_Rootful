@@ -11,43 +11,43 @@ import SwiftXPC
 import KRW
 
 
-let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-let vers = ProcessInfo.processInfo.operatingSystemVersion
-
-
-private var defaults: UserDefaults? = nil
-public func defs() -> UserDefaults {
-    if defaults == nil {
-        let defaultsPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0].path + "/Preferences/de.pinauten.Fugu15-Rootful.plist"
-        defaults = UserDefaults.init(suiteName: defaultsPath)
-    }
-    return defaults!
-}
-
-
-func tweaksEnabled() -> Bool {
-    if access(documentsDirectory.appendingPathComponent(".tweaks_disabled").path, F_OK) == 0 {
-        return false
-    } else {
-        return true
-    }
-}
-
-func isJailbroken() -> Bool {
-    if access("/Library/.installed_Fugu15_Rootful", F_OK) == 0 {
-        return true
-    } else {
-        return false
-    }
-}
-
-func setTweaksEnabled(_ enabled: Bool) {
-    if enabled {
-        try? FileManager.default.removeItem(atPath: documentsDirectory.appendingPathComponent(".tweaks_disabled").path)
-    } else {
-        FileManager.default.createFile(atPath: documentsDirectory.appendingPathComponent(".tweaks_disabled").path, contents: nil)
-    }
-}
+//let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//let vers = ProcessInfo.processInfo.operatingSystemVersion
+//
+//
+//private var defaults: UserDefaults? = nil
+//public func defs() -> UserDefaults {
+//    if defaults == nil {
+//        let defaultsPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0].path + "/Preferences/de.pinauten.Fugu15-Rootful.plist"
+//        defaults = UserDefaults.init(suiteName: defaultsPath)
+//    }
+//    return defaults!
+//}
+//
+//
+//func tweaksEnabled() -> Bool {
+//    if access(documentsDirectory.appendingPathComponent(".tweaks_disabled").path, F_OK) == 0 {
+//        return false
+//    } else {
+//        return true
+//    }
+//}
+//
+//func isJailbroken() -> Bool {
+//    if access("/Library/.installed_Fugu15_Rootful", F_OK) == 0 {
+//        return true
+//    } else {
+//        return false
+//    }
+//}
+//
+//func setTweaksEnabled(_ enabled: Bool) {
+//    if enabled {
+//        try? FileManager.default.removeItem(atPath: documentsDirectory.appendingPathComponent(".tweaks_disabled").path)
+//    } else {
+//        FileManager.default.createFile(atPath: documentsDirectory.appendingPathComponent(".tweaks_disabled").path, contents: nil)
+//    }
+//}
 
 struct SettingsView: View {
     @State private var enable_tweaks: Bool = tweaksEnabled()
@@ -75,15 +75,7 @@ struct SettingsView: View {
                     showAlert = true
                 }
             }
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text(enable_tweaks ? "Tweaks enabled" : "Tweaks disabled"), message: Text("To apply setting - reboot userspace"), dismissButton: .default(Text("Reboot Userspace"), action: {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                            let launchctlPath = "/usr/bin/launchctl"
-                            _ = execCmd(args: [launchctlPath, "reboot", "userspace"])
-                        })
-
-                }))
-            }
+            
             
             Text("Kernel exploit")
                 .font(.title3)

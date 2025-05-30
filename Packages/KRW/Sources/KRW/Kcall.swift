@@ -22,7 +22,7 @@ public extension KRW {
             return
         }
         
-        logger("[#] Status: Patchfinding")
+        logger("[#] Patchfinding")
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         
         gOffsets.slide = try kslide()
@@ -54,7 +54,7 @@ public extension KRW {
         gOffsets.VM_MAP_PMAP = patchfinder.VM_MAP_PMAP!
         gOffsets.PORT_LABEL = patchfinder.PORT_LABEL!
         
-        logger("[#] Status: Bypassing PAC")
+        logger("[#] Bypassing PAC")
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         
         gOurTask = ourProc!.task!.address
