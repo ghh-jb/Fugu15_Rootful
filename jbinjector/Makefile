@@ -2,7 +2,7 @@
 
 all: jbinjector.dylib
 
-jbinjector.dylib: jbinjector/jbinjector.c jbinjector/CodeSignature.c jbinjector/ffsys.s
+jbinjector.dylib: jbinjector/jbinjector.c jbinjector/CodeSignature.c
 	xcrun -sdk iphoneos clang -arch arm64 -arch arm64e $^ -o $@ -shared; codesign -s - $@
 
 clean:
